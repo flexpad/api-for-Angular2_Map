@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <link rel="stylesheet" href="__STATIC__/bootstrap3.3.7/css/bootstrap.css">
+    <link rel="stylesheet" href="__STATIC__/bootstrap3.3.7/css/fileinput.min.css"/>
+    <title>区间隧道巡检</title>
+    <style>
+        body{
+            background-color: #e4e4e4;
+        }
+        .row{
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        .row-head,.item-form,footer{
+            background-color: white;
+            margin-bottom: 20px;
+        }
+        .row-head{
+            height: 120px;
+            /*line-height: 1;*/
+        }
+        .row-head-item{
+            text-align: center;
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+        .row-head-img{
+            margin: 10px auto;
+        }
+        .row-head-img>img{
+            width: 70px;
+        }
+        .btn-primary{
+            background-color: #029a02;
+            border-color:#029a02 ;
+        }
+        .nav{
+            height: 55px;background-color: white;padding-top: 10px;text-align: center;
+            z-index: 999;
+            position: fixed;
+            bottom: 0px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+<nav class="nav row" >
+    <div class="col-xs-4 ">
+        <a  href="#">
+            <img src="__STATIC__/naa1.png" width="35px">
+        </a>
+    </div>
+    <div class="col-xs-4 ">
+        <a  href="#">
+            <img src="__STATIC__/nav2.png" width="35px">
+        </a>
+    </div>
+    <div class="col-xs-4 ">
+        <a  href="#">
+            <img src="__STATIC__/nav3.png" width="35px">
+        </a>
+    </div>
+</nav>
+<div class="row row-head" >
+    <div class="row" style="">
+        <div class="col-xs-3 row-head-item">
+            <div class="row-head-img" align="center">
+                <img src="__STATIC__/timg.jpg" alt="" />
+            </div>
+            <p>巡检录入</p>
+        </div>
+        <div class="col-xs-3 row-head-item">
+            <div class="row-head-img">
+                <img src="__STATIC__/A3.jpg" alt="" />
+            </div>
+            <p>工单查询</p>
+        </div>
+        <div class="col-xs-3 row-head-item">
+            <div class="row-head-img">
+                <img src="__STATIC__/A1.jpg" alt="" />
+            </div>
+            <p>技术规范</p>
+        </div>
+        <div class="col-xs-3 row-head-item">
+            <div class="row-head-img">
+                <img src="__STATIC__/A2.jpg" alt=""/>
+            </div>
+            <p>操作培训</p>
+        </div>
+    </div>
+
+</div>
+<div class="item-form">
+    <form method="post" action="{:url('crack')}"  enctype="multipart/form-data" style="width: 95%;margin: 0px auto;padding-top:10px;padding-bottom: 10px ">
+        <div class="form-group">
+            <label for="crack">隧道裂缝巡检报告</label>
+            <input id="crack" type="text" class="form-control"  placeholder="洞体裂缝宽度" name = "crack_width">
+            <input id="uuid" type="text" hidden name="form_token" value="{$form_token}">
+            <input id="iid" type="text" hidden name="iid" value="{$iid}">
+            <input id="cpid" type="text" hidden name="cpid" value="{$cpid}">
+        </div>
+        <div class="form-group">
+            <select class="form-control" name="crack_type">
+                <option>钢筋混泥土衬砌裂缝</option>
+                <option>普通混泥土衬砌裂缝</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <!--<label for="img">上传图片</label>-->
+            <!--<input id="img" placeholder="上传图片" runat="server" type="file" accept="image/*" capture="camera" />-->
+            <input type="file" placeholder="上传图片"  class="file"  id="img" accept="image/*" capture="camera" name="file">
+        </div>
+        <div class="form-group">
+            <label for="grade">危害等级初判</label>
+            <select id="grade" class="form-control" name="crack_risk">
+                <option value="1">一级</option>
+                <option value="2">二级</option>
+                <option value="3">三级</option>
+                <option value="4">四级</option>
+                <option value="5">五级</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg btn-block">提交</button>
+    </form>
+</div>
+<footer>
+    <div style="width: 95%;margin: 0px auto;padding-top:10px;padding-bottom: 5px">
+        <p >危害等级判断规范：</p>
+        <p>
+            一级：一般龟裂或无发展状态；
+            <br/>
+            二级：钢筋混凝土衬砌裂缝宽度δ＜0.3mm；普通混凝土衬砌裂缝宽度δ＜3mm 且长度L＜5m；
+            <br/>
+            三级：钢筋混凝土衬砌裂缝宽度0.5mm≥δ≥0.3mm；普通混凝土衬砌裂缝宽度5mm≥δ≥3mm，长度L＜5mm 且裂缝有发展，但速度不快；
+            <br/>
+            四级：衬砌出现贯通裂缝；钢筋混凝土衬砌裂缝宽度δ＞0.5mm；普通混凝土衬砌裂缝宽度δ＞5mm，长度10m≥L≥5m 且裂缝密集；
+        </p>
+    </div>
+
+</footer>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<script src="__STATIC__/jquery-3.1.1.min.js"></script>
+<script src="__STATIC__/bootstrap3.3.7/js/bootstrap.min.js"></script>
+<script src="__STATIC__/bootstrap3.3.7/js/fileinput.min.js"></script>
+<script>
+
+
+</script>
+</body>
+</html>

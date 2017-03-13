@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <link rel="stylesheet" href="__STATIC__/bootstrap3.3.7/css/bootstrap.css">
+    <link rel="stylesheet" href="__STATIC__/bootstrap3.3.7/css/fileinput.min.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATIC__/html5-Qrcode/lib/my.css">
+    <title>区间隧道巡检</title>
+    <style>
+        body{
+            background-color: #e4e4e4;
+        }
+        .row{
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        .row-head,.item,footer{
+            background-color: white;
+            margin-bottom: 20px;
+        }
+        .row-head{
+            height: 120px;
+            /*line-height: 1;*/
+        }
+        .row-head-item{
+            text-align: center;
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+        .row-head-img{
+            margin: 10px auto;
+        }
+        .row-head-img>img{
+            width: 70px;
+        }
+        .row-item-img>img{
+            width: 80%;
+        }
+        .row-head-item>p{
+            margin-bottom:10px;
+            margin-top: 8px;
+        }
+        .latest{
+            background-color: #34ffcc;
+        }
+        .footer{
+            width: 95%;margin: 0px auto;padding-top:10px;padding-bottom: 10px
+        }
+        .nav{
+            height: 55px;background-color: white;padding-top: 10px;text-align: center;
+            z-index: 999;
+            position: fixed;
+            bottom: 0px;
+            width: 100%;
+        }
+        .item {
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+        input[node-type=jsbridge]{
+            visibility: hidden;
+        }
+    </style>
+    <script src="__STATIC__/jquery-3.1.1.min.js"></script>
+    <script src="__STATIC__/html5-Qrcode/lib/zepto.js"></script>
+    <!--<script src="__STATIC__/bootstrap3.3.7/js/bootstrap.min.js"></script>-->
+    <!--<script src="__STATIC__/bootstrap3.3.7/js/fileinput.min.js"></script>--><!--
+    <script type="text/javascript" src="__STATIC__/jsqrcode/src/grid.js"></script>
+    <script type="text/javascript" src="__STATIC__/jsqrcode/src/version.js"></script>
+    <script type="text/javascript" src="__STATIC__/jsqrcode/src/detector.js"></script>
+    <script type="text/javascript" src="__STATIC__/jsqrcode/src/formatinf.js"></script>
+    <script type="text/javascript" src="__STATIC__/jsqrcode/src/errorlevel.js"></script>
+    <script type="text/javascript" src="__STATIC__/jsqrcode/src/bitmat.js"></script>
+    <script type="text/javascript" src="__STATIC__/jsqrcode/src/datablock.js"></script>
+    <script type="text/javascript" src="__STATIC__/jsqrcode/src/bmparser.js"></script>
+    <script type="text/javascript" src="__STATIC__/jsqrcode/src/datamask.js"></script>
+    <script type="text/javascript" src="__STATIC__/jsqrcode/src/rsdecoder.js"></script>
+    <script type="text/javascript" src="__STATIC__/jsqrcode/src/gf256poly.js"></script>
+    <script type="text/javascript" src="__STATIC__/jsqrcode/src/gf256.js"></script>
+    <script type="text/javascript" src="__STATIC__/jsqrcode/src/decoder.js"></script>
+    <script type="text/javascript" src="__STATIC__/jsqrcode/src/qrcode.js"></script>
+    <script type="text/javascript" src="__STATIC__/jsqrcode/src/findpat.js"></script>
+    <script type="text/javascript" src="__STATIC__/jsqrcode/src/alignpat.js"></script>
+    <script type="text/javascript" src="__STATIC__/jsqrcode/src/databr.js"></script>-->
+    <script src="__STATIC__/html5-Qrcode/lib/qrcode.lib.min.js"></script>
+    <script src="__STATIC__/html5-Qrcode/lib/qrcode.js?ver0.3.1"></script>
+</head>
+<body>
+<nav class="nav row" >
+    <div class="col-xs-4 ">
+        <a  href="#">
+            <img src="__STATIC__/naa1.png" width="35px">
+        </a>
+    </div>
+    <div class="col-xs-4 ">
+        <a  href="#">
+            <img src="__STATIC__/nav2.png" width="35px">
+        </a>
+    </div>
+    <div class="col-xs-4 ">
+        <a  href="#">
+            <img src="__STATIC__/nav3.png" width="35px">
+        </a>
+    </div>
+</nav>
+<div class="row row-head" >
+    <div class="row" style="">
+        <div class="col-xs-3 row-head-item">
+            <div class="row-head-img" align="center">
+                <img src="__STATIC__/timg.jpg" alt="" />
+            </div>
+            <p>巡检录入</p>
+        </div>
+        <div class="col-xs-3 row-head-item">
+            <div class="row-head-img">
+                <img src="__STATIC__/A3.jpg" alt="" />
+            </div>
+            <p>工单查询</p>
+        </div>
+        <div class="col-xs-3 row-head-item">
+            <div class="row-head-img">
+                <img src="__STATIC__/A1.jpg" alt="" />
+            </div>
+            <p>技术规范</p>
+        </div>
+        <div class="col-xs-3 row-head-item">
+            <div class="row-head-img">
+                <img src="__STATIC__/A2.jpg" alt=""/>
+            </div>
+            <p>操作培训</p>
+        </div>
+    </div>
+
+</div>
+<div class="item" >
+    <p >当前巡检点：</p>
+    <p class="latest">请点击以下按钮扫描标签</p>
+    <p></p>
+    <div class="qr-btn" node-type="jsbridge">扫描标注二维码
+        <input node-type="jsbridge" type="file" name="myPhoto" accept="image/*" capture="camera" value="扫描二维码1" />
+    </div>
+    <p>扫描获取标签值：<span class="result-qrcode" id="IotLable1"></span></p>
+</div>
+<div class="item">
+    <p style="margin-left: 10px">隧道巡检项目：</p>
+    <div class="row" style="">
+        <div class="col-xs-4 row-head-item">
+            <div class="row-item-img"  align="center">
+                <img src="__STATIC__/B1.jpg" alt="" id="tunnel_crack" class="crack"/>
+            </div>
+            <p>洞体裂缝</p>
+        </div>
+        <div class="col-xs-4 row-head-item">
+            <div class="row-item-img" >
+                <img src="__STATIC__/B2.jpg" alt="" id="tunnel_leak" class="leak"/>
+            </div>
+            <p>渗漏水</p>
+        </div>
+        <div class="col-xs-4 row-head-item">
+            <div class="row-item-img">
+                <img src="__STATIC__/B2.jpg" alt="" />
+            </div>
+            <p>洞体变形</p>
+        </div>
+    </div>
+    <div class="row" style="">
+        <div class="col-xs-4 row-head-item">
+            <div class="row-item-img" align="center">
+                <img src="__STATIC__/B4.jpg" alt="" />
+            </div>
+            <p>变形缝</p>
+        </div>
+        <div class="col-xs-4 row-head-item">
+            <div class="row-item-img">
+                <img src="__STATIC__/B4.jpg" alt="" />
+            </div>
+            <p>仰拱压溃</p>
+        </div>
+        <div class="col-xs-4 row-head-item">
+            <div class="row-item-img">
+                <img src="__STATIC__/B4.jpg" alt="" />
+            </div>
+            <p>材料裂化</p>
+        </div>
+    </div>
+</div>
+<footer>
+    <div class="footer" >
+        <p >最新工单内容：</p>
+        <p class="latest">请前往3号隧道1标段展开巡视。</p>
+
+        <!--<div class="qr-btn" node-type="jsbridge">扫描标注二维码
+            <input node-type="jsbridge" type="file" name="myPhoto" accept="image/*" capture="camera" value="扫描二维码2" />
+        </div>-->
+    </div>
+
+
+</footer>
+
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+
+
+<script>
+    //<![CDATA[
+    $(document).ready(function() {
+        $(".crack").click(function () {
+            var param = $("#IotLable1").text();
+            if (param) {
+                console.log("api.jzk12.com/index/inspection/crack/iid/1/cpode/", param);
+                location.href = "http://api.jzk12.com/index/inspection/crack/iid/1/cpcode/" + param;
+            }
+        });
+    });
+    //]]>
+</script>
+<script>
+    $(function () {
+        Qrcode.init($('[node-type=jsbridge]'));
+    });
+    /*    (function($) {
+     var Qrcode = function(tempBtn) {
+     //该对象只支持微博域下的解析，也就是说不是微博域下的页面只能用第二种方案解析二维码
+     if (window.WeiboJSBridge) {
+     $(tempBtn).on('click', this.weiBoBridge);
+     } else {
+     $(tempBtn).on('change', this.getImgFile);
+     }
+     };
+     Qrcode.prototype = {
+     weiBoBridge: function() {
+     WeiboJSBridge.invoke('scanQRCode', null, function(params) {
+     //得到扫码的结果
+     location.href=params.result;
+     });
+     },
+     getImgFile: function() {
+     var _this_ = this;
+     var imgFile = $(this)[0].files;
+     var oFile = imgFile[0];
+     var oFReader = new FileReader();
+     var rFilter = /^(?:image\/bmp|image\/cis\-cod|image\/gif|image\/ief|image\/jpeg|image\/jpeg|image\/jpeg|image\/pipeg|image\/png|image\/svg\+xml|image\/tiff|image\/x\-cmu\-raster|image\/x\-cmx|image\/x\-icon|image\/x\-portable\-anymap|image\/x\-portable\-bitmap|image\/x\-portable\-graymap|image\/x\-portable\-pixmap|image\/x\-rgb|image\/x\-xbitmap|image\/x\-xpixmap|image\/x\-xwindowdump)$/i;
+     if (imgFile.length === 0) {
+     return;
+     }
+     if (!rFilter.test(oFile.type)) {
+     alert("选择正确的图片格式!");
+     return;
+     }
+     //读取图片成功后执行的代码
+     oFReader.onload = function(oFREvent) {
+     qrcode.decode(oFREvent.target.result);
+     qrcode.callback = function(data) {
+     //得到扫码的结果
+     location.href = data;
+     };
+     };
+     oFReader.readAsDataURL(oFile);
+     },
+     destory: function() {
+     $(tempBtn).off('click');
+     }
+     };
+     //初始化
+     Qrcode.init = function(tempBtn) {
+     var _this_ = this;
+     var inputDom;
+     tempBtn.each(function() {
+     new _this_($(this));
+     });
+     $('[node-type=qr-btn]').on('click', function() {
+     $(this).find('[node-type=jsbridge]')[0].click();
+     });
+     };
+     window.Qrcode = Qrcode;
+     })(window.Zepto ? Zepto : jQuery);*/ </script>
+</body>
+</html>
