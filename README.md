@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ThinkPHP 5.0
 ===============
 
@@ -127,3 +128,6 @@ All rights reserved。
 ThinkPHP® 商标和著作权所有者为上海顶想信息科技有限公司。
 
 更多细节参阅 [LICENSE.txt](LICENSE.txt)
+=======
+# api-for-Angular2_Map
+>>>>>>> eec3f84d95c217695624bd3b40784d144df5fa91
